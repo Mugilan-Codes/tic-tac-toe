@@ -17,6 +17,8 @@ const GameBoard = (function () {
     X_MOVE,
   ];
 
+  // let sampleBoard = Object.seal([...Array(9)]);
+
   const render = () => {
     console.log(gameBoard);
     gridPositions__div.forEach((pos) => {
@@ -24,23 +26,25 @@ const GameBoard = (function () {
     });
   };
 
-  return { render };
+  const setPiece = (e) => {
+    console.log(e.target.dataset.position);
+  };
+
+  return { render, setPiece };
 })();
 
 // Factory
-const CreatePlayer = (name) => {
+const CreatePlayer = (name, key) => {
   let score = 0;
-  return { name, score };
+  return { name, score, key };
 };
 
-const player1 = CreatePlayer('Mugilan');
-const player2 = CreatePlayer('Jay');
+const player1 = CreatePlayer('Mugilan', X_MOVE);
+const player2 = CreatePlayer('Jay', O_MOVE);
 
 console.log({ player1, player2 });
 GameBoard.render();
 
-// console.log(gridPositions__div);
-
-// gridPositions__div.forEach((pos) =>
-//   pos.addEventListener('click', (e) => console.log(e.target.dataset.position))
-// );
+gridPositions__div.forEach((pos) =>
+  pos.addEventListener('click', GameBoard.setPiece)
+);
