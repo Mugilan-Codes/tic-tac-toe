@@ -11,19 +11,32 @@ body {
   align-items: center;
 }
 
+header,
+main,
+footer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 header {
   flex: 1;
 }
 
 main {
   flex: 8;
+}
+
+.grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-gap: 1rem;
+  width: 400px;
+  height: 400px;
 }
 
 .grid-item {
-  background: #aa1111;
+  border: 1px solid #000;
 }
 
 footer {
