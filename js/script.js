@@ -1,23 +1,9 @@
-const X_MOVE = 'X';
-const O_MOVE = 'O';
-
 const gridPositions__div = document.querySelectorAll('.grid-item');
 
 // Module
 const GameBoard = (function () {
-  // let gameBoard = [
-  //   X_MOVE,
-  //   O_MOVE,
-  //   X_MOVE,
-  //   O_MOVE,
-  //   X_MOVE,
-  //   O_MOVE,
-  //   X_MOVE,
-  //   O_MOVE,
-  //   X_MOVE,
-  // ];
+  let gameBoard = ['', '', '', '', '', '', '', '', ''];
 
-  let gameBoard = Object.seal([...Array(9)]);
   let lastMarker;
 
   const _render = () => {
@@ -29,7 +15,7 @@ const GameBoard = (function () {
 
   const setPiece = function (player) {
     console.log(this);
-    gameBoard[this.dataset.position] = 'X';
+    gameBoard[this.dataset.position] = player2.placeMarker();
     _render();
   };
 
@@ -38,17 +24,18 @@ const GameBoard = (function () {
 
 // Factory
 const CreatePlayer = (name, key) => {
+  const MOVES = ['X', 'O'];
   let score = 0;
 
   const placeMarker = () => {
-    return key;
+    return MOVES[key];
   };
 
   return { name, score, placeMarker };
 };
 
-const player1 = CreatePlayer('Mugilan', X_MOVE);
-const player2 = CreatePlayer('Jay', O_MOVE);
+const player1 = CreatePlayer('Mugilan', 0);
+const player2 = CreatePlayer('Jay', 1);
 
 player1.placeMarker();
 player2.placeMarker();

@@ -31,8 +31,8 @@ main {
 .grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  width: 400px;
-  height: 400px;
+  /* width: 400px;
+  height: 400px; */
 }
 
 .grid-item {
@@ -42,6 +42,8 @@ main {
   align-items: center;
   justify-content: center;
   text-align: center;
+  width: 100px;
+  height: 100px;
 }
 
 footer {
