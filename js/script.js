@@ -5,45 +5,56 @@ const gridPositions__div = document.querySelectorAll('.grid-item');
 
 // Module
 const GameBoard = (function () {
-  let gameBoard = [
-    X_MOVE,
-    O_MOVE,
-    X_MOVE,
-    O_MOVE,
-    X_MOVE,
-    O_MOVE,
-    X_MOVE,
-    O_MOVE,
-    X_MOVE,
-  ];
+  // let gameBoard = [
+  //   X_MOVE,
+  //   O_MOVE,
+  //   X_MOVE,
+  //   O_MOVE,
+  //   X_MOVE,
+  //   O_MOVE,
+  //   X_MOVE,
+  //   O_MOVE,
+  //   X_MOVE,
+  // ];
 
-  // let sampleBoard = Object.seal([...Array(9)]);
+  let gameBoard = Object.seal([...Array(9)]);
+  let lastMarker;
 
-  const render = () => {
+  const _render = () => {
     console.log(gameBoard);
     gridPositions__div.forEach((pos) => {
       pos.textContent = gameBoard[pos.dataset.position];
     });
   };
 
-  const setPiece = (e) => {
-    console.log(e.target.dataset.position);
+  const setPiece = function (player) {
+    console.log(this);
+    gameBoard[this.dataset.position] = 'X';
+    _render();
   };
 
-  return { render, setPiece };
+  return { setPiece };
 })();
 
 // Factory
 const CreatePlayer = (name, key) => {
   let score = 0;
-  return { name, score, key };
+
+  const placeMarker = () => {
+    return key;
+  };
+
+  return { name, score, placeMarker };
 };
 
 const player1 = CreatePlayer('Mugilan', X_MOVE);
 const player2 = CreatePlayer('Jay', O_MOVE);
 
+player1.placeMarker();
+player2.placeMarker();
+
 console.log({ player1, player2 });
-GameBoard.render();
+// GameBoard.render();
 
 gridPositions__div.forEach((pos) =>
   pos.addEventListener('click', GameBoard.setPiece)
