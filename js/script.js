@@ -17,8 +17,9 @@ const GameBoard = (function () {
         // Returns if the cell is already filled
         if (gameBoard[this.dataset.position]) return;
 
-        gameBoard[this.dataset.position] = 'X';
+        gameBoard[this.dataset.position] = GamePlay.currentPlayer().marker;
         _render();
+        GamePlay.switchPlayer();
       })
     );
   };
@@ -26,13 +27,25 @@ const GameBoard = (function () {
   return { clickOnBoard };
 })();
 
-const PlayerFactory = (name, marker) => {
-  return { name, marker };
+const PlayerFactory = (name, marker, isPlaying = false) => {
+  let moveTracker = [];
+  return { name, marker, isPlaying, moveTracker };
 };
 
-const player1 = PlayerFactory('Mugilan', 'X');
+const player1 = PlayerFactory('Mugilan', 'X', true);
 const player2 = PlayerFactory('Jay', 'O');
 
 console.log({ player1, player2 });
+
+const GamePlay = (function () {
+  let currentPlayer = () => (player1.isPlaying ? player1 : player2);
+
+  const switchPlayer = () => {
+    player1.isPlaying = !player1.isPlaying;
+    player2.isPlaying = !player2.isPlaying;
+  };
+
+  return { switchPlayer, currentPlayer };
+})();
 
 GameBoard.clickOnBoard();
