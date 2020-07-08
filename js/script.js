@@ -3,22 +3,31 @@ const GameBoard = (function () {
   // const gameBoard = Object.seal([...Array(9)].fill(''));
   const gameBoard = ['X', 'O', 'X', 'O', 'X', 'O', 'X', 'O', 'X'];
 
-  return { gameBoard };
-})();
+  const gridItems = document.querySelectorAll('.grid-item');
 
-const DisplayController = (function () {
   const render = () => {
-    console.log(GameBoard.gameBoard);
+    console.log(gameBoard);
+    gridItems.forEach(
+      (item) => (item.textContent = gameBoard[item.dataset.position])
+    );
   };
 
   return { render };
 })();
 
-const PlayerFactory = (name) => name;
+const DisplayController = (function () {
+  const placeMarker = () => {};
 
-DisplayController.render();
+  return { placeMarker };
+})();
 
-const player1 = PlayerFactory('Mugilan');
-const player2 = PlayerFactory('Jay');
+const PlayerFactory = (name, marker) => {
+  return { name, marker };
+};
+
+GameBoard.render();
+
+const player1 = PlayerFactory('Mugilan', 'X');
+const player2 = PlayerFactory('Jay', 'O');
 
 console.log({ player1, player2 });
