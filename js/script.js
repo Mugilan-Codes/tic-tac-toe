@@ -14,10 +14,13 @@ const GameBoard = (function () {
   const clickOnBoard = () => {
     gridItems.forEach((item) =>
       item.addEventListener('click', function () {
-        // Returns if the cell is already filled
-        if (gameBoard[this.dataset.position]) return;
+        const position = this.dataset.position;
 
-        gameBoard[this.dataset.position] = GamePlay.currentPlayer().marker;
+        // Returns if the cell is already filled
+        if (gameBoard[position]) return;
+
+        gameBoard[position] = GamePlay.currentPlayer().marker;
+        GamePlay.currentPlayer().moveTracker.push(position);
         _render();
         GamePlay.switchPlayer();
       })
