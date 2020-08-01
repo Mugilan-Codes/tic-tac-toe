@@ -3,7 +3,12 @@ const players = (name, marker) => {
 };
 
 const gameBoard = (function () {
-  let board = ['', '', '', '', '', '', '', '', ''];
+  let board;
+  const resetBoard = () => {
+    board = ['', '', '', '', '', '', '', '', ''];
+    console.log(board);
+  };
+  resetBoard();
 
   const updateBoard = (marker, position) => {
     if (board[position] !== '') return;
@@ -11,7 +16,7 @@ const gameBoard = (function () {
     console.log(board);
   };
 
-  return { updateBoard };
+  return { resetBoard, updateBoard };
 })();
 
 const displayController = (function () {})();
